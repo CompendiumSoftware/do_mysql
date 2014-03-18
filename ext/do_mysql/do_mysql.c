@@ -326,11 +326,11 @@ void do_mysql_full_connect(VALUE self, MYSQL *db) {
   }
   else {
     rb_warn("Encoding %s is not a known Ruby encoding for MySQL\n", rb_str_ptr_readonly(encoding));
-    rb_iv_set(self, "@encoding", rb_str_new2("latin1"));
+    rb_iv_set(self, "@encoding", rb_str_new2("UTF-8"));
 #ifdef HAVE_RUBY_ENCODING_H
-    rb_iv_set(self, "@encoding_id", rb_str_new2("latin1"));
+    rb_iv_set(self, "@encoding_id", INT2FIX(rb_enc_find_index("UTF-8")));
 #endif
-    rb_iv_set(self, "@my_encoding", rb_str_new2("latin1"));
+    rb_iv_set(self, "@my_encoding", rb_str_new2("utf8"));
   }
 #endif
 
@@ -397,7 +397,7 @@ VALUE do_mysql_cConnection_initialize(VALUE self, VALUE uri) {
   if (!encoding) {
     encoding = data_objects_get_uri_option(r_query, "charset");
 
-    if (!encoding) { encoding = "UTF-8"; }
+    if (!encoding) { encoding = "ISO-8859-1"; }
   }
 
   rb_iv_set(self, "@encoding", rb_str_new2(encoding));
