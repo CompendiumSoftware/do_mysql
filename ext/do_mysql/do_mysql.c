@@ -295,7 +295,7 @@ void do_mysql_full_connect(VALUE self, MYSQL *db) {
 #endif
 
 #ifdef MYSQL_OPT_RECONNECT
-  my_bool reconnect = 1;
+  my_bool reconnect = 0;
   mysql_options(db, MYSQL_OPT_RECONNECT, &reconnect);
 #endif
 
