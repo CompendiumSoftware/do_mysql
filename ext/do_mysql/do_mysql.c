@@ -397,7 +397,7 @@ VALUE do_mysql_cConnection_initialize(VALUE self, VALUE uri) {
   if (!encoding) {
     encoding = data_objects_get_uri_option(r_query, "charset");
 
-    if (!encoding) { encoding = "ISO-8859-1"; }
+    if (!encoding) { encoding = "latin1"; }
   }
 
   rb_iv_set(self, "@encoding", rb_str_new2(encoding));
