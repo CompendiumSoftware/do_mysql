@@ -336,6 +336,7 @@ void do_mysql_full_connect(VALUE self, MYSQL *db) {
 
   // Disable sql_auto_is_null
   do_mysql_cCommand_execute(Qnil, self, db, rb_str_new2("SET sql_auto_is_null = 0"));
+  do_mysql_cCommand_execute(Qnil, self, db, rb_str_new2("SET names 'latin1'"));
   // removed NO_AUTO_VALUE_ON_ZERO because of MySQL bug http://bugs.mysql.com/bug.php?id=42270
   // added NO_BACKSLASH_ESCAPES so that backslashes should not be escaped as in other databases
 
