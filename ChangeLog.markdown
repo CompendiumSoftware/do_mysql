@@ -1,7 +1,3 @@
-## 0.10.14 2014-02-13
-
-* Don't do DNS lookup in transaction loading
-
 ## 0.10.13 2013-05-27
 
 * Windows binary for Ruby 2.0

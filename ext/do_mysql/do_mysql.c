@@ -295,7 +295,7 @@ void do_mysql_full_connect(VALUE self, MYSQL *db) {
 #endif
 
 #ifdef MYSQL_OPT_RECONNECT
-  my_bool reconnect = 0;
+  my_bool reconnect = 1;
   mysql_options(db, MYSQL_OPT_RECONNECT, &reconnect);
 #endif
 
@@ -336,7 +336,6 @@ void do_mysql_full_connect(VALUE self, MYSQL *db) {
 
   // Disable sql_auto_is_null
   do_mysql_cCommand_execute(Qnil, self, db, rb_str_new2("SET sql_auto_is_null = 0"));
-  do_mysql_cCommand_execute(Qnil, self, db, rb_str_new2("set names 'latin1'"));
   // removed NO_AUTO_VALUE_ON_ZERO because of MySQL bug http://bugs.mysql.com/bug.php?id=42270
   // added NO_BACKSLASH_ESCAPES so that backslashes should not be escaped as in other databases
 
@@ -398,7 +397,7 @@ VALUE do_mysql_cConnection_initialize(VALUE self, VALUE uri) {
   if (!encoding) {
     encoding = data_objects_get_uri_option(r_query, "charset");
 
-    if (!encoding) { encoding = "latin1"; }
+    if (!encoding) { encoding = "UTF-8"; }
   }
 
   rb_iv_set(self, "@encoding", rb_str_new2(encoding));
